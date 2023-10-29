@@ -1,4 +1,18 @@
-<?php require 'inc/data/products.php'; ?>
+<?php
+session_start(); // Démarre la session s'il n'est pas déjà démarré
+
+require 'inc/data/products.php'; // Inclut le fichier de données
+
+if (isset($_GET['add_to_cart'])) {
+    $cookieId = $_GET['add_to_cart']; // Récupère l'ID du biscuit ajouté
+
+    // Vérifie si le biscuit existe dans le catalogue
+    if (isset($catalog[$cookieId])) {
+        // Ajoute le biscuit au panier (dans la session)
+        $_SESSION['cart'][] = $catalog[$cookieId];
+    }
+}
+?>
 <?php require 'inc/head.php'; ?>
 <section class="cookies container-fluid">
     <div class="row">
